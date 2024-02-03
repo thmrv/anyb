@@ -1,0 +1,6 @@
+<div class="button wrapper <%= @style %>">
+    <a href="<%= @href %>" class="button-link wrapper">
+        <% if @icon != '' %><%= render(ImageComponent.new(src: @icon, href: '/')) do %><% end %><% end %>
+        <%= @contents %>
+    </a>
+</div>

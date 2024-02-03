@@ -1,0 +1,77 @@
+<section class="section configurator">
+    <div class="configurator upper wrapper">
+        <%= render(ImageComponent.new(src: 'levelup.png', href: '/')) do %><% end %>
+        <div class="configurator title choose-your-game"><%= t('strings.choose_game') %><%= render(ImageComponent.new(src: 'arrow_pointer_right.svg', href: '/')) do %><% end %></div>
+    </div>
+    <div class="configurator wrapper">
+        <div class="configurator sidebar game-selector">
+            <% @games.each_with_index do |game, index| %>
+            <div class="tab game <% if index == 0 %> selected <% end %> animate__animated animate__fadeInUp">
+                <div class="game icon wrapper"><%= render(ImageComponent.new(src: game[2], href: '/')) do %><% end %><%= game[0] %></div><%= render(ImageComponent.new(src: 'icon_arrow_gametab.svg', href: '/')) do %><% end %>
+            </div>
+            <% end %>
+        </div>
+        <div class="game illustrated-preview">
+            <% @games.each_with_index do |game, index| %>
+            <div class="preview <% if index != 0 %> hidden <% end %> inner animate__animated animate__fadeInLeft" preview-<%= game[0] %>>
+                <%= render(ImageComponent.new(src: game[1], href: '/')) do %><% end %>
+            </div>
+            <% end %>
+            <%= render(ImageComponent.new(src: 'preview_lighting.png', href: '/')) do %><% end %>
+        </div>
+    </div>
+    </div>
+    <div class="configurator lower wrapper">
+    <div class="block-disabled"><div class="lds-ripple"><div></div><div></div></div></div>
+        <% @games.each_with_index do |game, index| %>
+        <div class="game outer <% if index != 0 %> hidden <% end %>">
+            <div class="services wrapper animate__animated animate__fadeInUp">
+                <%= render(ImageComponent.new(src: 'services_shadow.svg', href: '/', wrapperclassname: 'services-shadow')) do %><% end %>
+                <div class="services inner">
+                    <% @services[index].each_with_index do |service, sIndex| %>
+                    <div class="service tab <% if sIndex == 0 %> selected<% end %>"><%= service %></div>
+                    <% end %>
+                </div>
+            </div>
+            <div class="ranks wrapper animate__animated animate__fadeInUp">
+                <%= render(InputComponent.new(label: t('strings.rank-current'), name: 'rank-current', classname: 'configurator-input', type: 'text', rank: true, defaultValue: '2300')) do %><% end %>
+                <%= render(ImageComponent.new(src: 'icon_dots.svg', href: '/', wrapperclassname: 'rank-dots')) do %><% end %>
+                <%= render(InputComponent.new(label: t('strings.rank-desired'), name: 'rank-desired', classname: 'configurator-input', type: 'text', rank: true)) do %><% end %>
+            </div>
+            <div class="fields wrapper animate__animated animate__fadeInUp">
+                <% @fields[index].each_with_index do |field, fIndex| %>
+                <%= render(InputComponent.new(label: t("#{'strings.'}#{field}"), name: field, classname: 'configurator-input', type: 'text')) do %><% end %>
+                <% end %>
+            </div>
+            <div class="results wrapper animate__animated animate__fadeInUp">
+                <div class="extras wrapper inner">
+                    <% @extra[index].each_with_index do |extra, eIndex| %>
+                        <div class="extra wrapper"><div class="extra inner"><%= render(SwitchComponent.new(defaultValue: false)) do %><% end %><%= extra %></div></div>
+                    <% end %>
+                </div>
+                <div class="calculated wrapper animate__animated animate__fadeInUp">
+                    <div class="fullprice inner">
+                        <label class="fullprice label"><%= t('strings.fullprice') %></label>
+                        <div class="fullprice price" price><span class="currency"><%= t('strings.currency_sign') %></span>____</div>
+                        <%= render(ButtonComponent.new(href: '#', style: 'filled-purple', contents: t('strings.order_boost'), icon: 'arrow_trigger.svg')) do %><% end %>
+                    </div>
+                    <div class="fullprice compare inner">
+                        <label class="fullprice label"><%= t('strings.fullprice_compare') %></label>
+                        <div class="fullprice price compare" price><span class="currency">~<%= t('strings.currency_sign') %></span>____</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+    <div class="configurator footer">
+        <div class="paygate-logos wrapper animate__animated animate__fadeInUp">
+            <%= render(ImageComponent.new(src: 'icon_visa.svg', href: '/', wrapperclassname: 'paygate-icon')) do %><% end %>
+            <%= render(ImageComponent.new(src: 'icon_mc.svg', href: '/', wrapperclassname: 'paygate-icon')) do %><% end %>
+            <%= render(ImageComponent.new(src: 'icon_mir.svg', href: '/', wrapperclassname: 'paygate-icon')) do %><% end %>
+        </div>
+        <div class="support wrapper animate__animated animate__fadeInUp">
+            <a href="#"><%= t('strings.support') %></a>
+            <%= render(ImageComponent.new(src: 'icon_support.svg', href: '/', wrapperclassname: 'support-icon')) do %><% end %>
+        </div>
+    </div>
